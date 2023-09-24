@@ -3,7 +3,12 @@ import "@rainbow-me/rainbowkit/styles.css"
 import "react-toastify/dist/ReactToastify.css"
 
 import type { AppProps } from "next/app"
-import { RainbowKitProvider, darkTheme, getDefaultWallets } from "@rainbow-me/rainbowkit"
+import {
+  RainbowKitProvider,
+  connectorsForWallets,
+  darkTheme,
+  getDefaultWallets,
+} from "@rainbow-me/rainbowkit"
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { zora, zoraTestnet } from "@wagmi/core/chains"
 import { alchemyProvider } from "wagmi/providers/alchemy"
@@ -21,13 +26,13 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(myChains
   publicProvider(),
 ])
 
-const { connectors } = getDefaultWallets({
+const { wallets } = getDefaultWallets({
   appName: "Relief",
   projectId: "d087318e2c264d6bd85a134ec9e85d92",
   chains,
 })
-
-const wagmiClient = createConfig({
+const connectors = connectorsForWallets(wallets)
+const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
   publicClient,
@@ -36,7 +41,7 @@ const wagmiClient = createConfig({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig config={wagmiClient}>
+    <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
         modalSize="compact"
         chains={chains}
