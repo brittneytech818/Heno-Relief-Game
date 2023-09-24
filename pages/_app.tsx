@@ -23,7 +23,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(myChains
 
 const { connectors } = getDefaultWallets({
   appName: "Relief",
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_KEY,
+  projectId: "d087318e2c264d6bd85a134ec9e85d92",
   chains,
 })
 
