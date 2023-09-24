@@ -1,11 +1,11 @@
 import { useAccount } from "wagmi"
 import { useState } from "react"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
 import TokenGateModal from "../TokenGateModal"
 import useBalanceOf from "../../hooks/useBalanceOf"
 import useZoraMint from "../../hooks/useZoraMint"
 import Button from "../Button"
 import Spinner from "../Spinner"
+import CustomConnectWallet from "../CustomConnectWallet"
 
 const GamePage = () => {
   const [minting, setMinting] = useState(false)
@@ -36,7 +36,7 @@ const GamePage = () => {
               )}
             </div>
           ) : (
-            <ConnectButton />
+            <CustomConnectWallet />
           )}
         </TokenGateModal>
       )}
